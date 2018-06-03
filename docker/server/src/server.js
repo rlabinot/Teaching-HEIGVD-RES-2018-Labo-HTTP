@@ -40,7 +40,10 @@ server.get('/', (request, response) => {
         case "text/html":
             console.log("content-type -> html");
             response.send("<html>\n" +
-                "<header>" + moment().add(difference).format("LTS") + "</header>\n" +
+                "<header></header>\n" +
+                "\t<body>\n" +
+                "\t\t<div>" + moment().add(diff).format("LTS") + "</div>\n" +
+                "\t</body>\n" +
                 "</html>");
             break;
         default:
@@ -55,7 +58,7 @@ server.post('/', (request, response) => {
     // Calculating the difference with current time and given time
     postDate = moment(request.body.time);
     currentDate = moment();
-    difference = postDate.difference(currentDate);
+    difference = postDate.diff(currentDate);
 
     switch (request.headers["content-type"]) {
         case "application/json":
@@ -71,13 +74,15 @@ server.post('/', (request, response) => {
         case "text/html":
             console.log("content-type -> html");
             response.send("<html>\n" +
-                "<header>" + moment().add(difference).format("LTS") + "</header>\n" +
+                "<header></header>\n" +
+                "\t<body>\n" +
+                "\t\t<div>" + moment().add(diff).format("LTS") + "</div>\n" +
+                "\t</body>\n" +
                 "</html>");
             break;
         default:
             console.log("POST ERROR : not a Json, XML or HTML request");
     }
-
 });
 
 // Launching the time server
